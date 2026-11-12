@@ -284,6 +284,61 @@ gunicorn app:app
 Click Deploy and wait for the deployment process to complete.
 
 After successful deployment, Render provides a public URL to access the Student Performance Prediction application.
+## Results
+
+The Linear Regression model was trained using 80% of the dataset and evaluated using the remaining 20%.
+
+### Model Evaluation Results
+
+The model performance was evaluated using R² Score, Mean Squared Error (MSE), and Root Mean Squared Error (RMSE).
+
+| Evaluation Metrics | Training Data | Testing Data |
+|---|---:|---:|
+| R² Score | 0.9887 (98.87%) | 0.9890 (98.90%) |
+| Mean Squared Error (MSE) | 4.1697 | 4.0826 |
+| Root Mean Squared Error (RMSE) | 2.0420 | 2.0206 |
+
+### Performance Analysis
+
+- **Training R² Score:** 98.87%
+- **Testing R² Score:** 98.90%
+- **Training MSE:** 4.1697
+- **Testing MSE:** 4.0826
+- **Training RMSE:** 2.0420
+- **Testing RMSE:** 2.0206
+
+The model achieved a testing R² score of approximately **98.90%**, indicating that it explains a high proportion of the variation in the Performance Index.
+
+The training and testing results are very close, indicating consistent model performance on both datasets.
+
+### Sample Prediction
+
+The trained model accepts five input features and predicts the student's Performance Index.
+
+**Sample Input:**
+
+| Feature | Value |
+|---|---:|
+| Hours Studied | 7 |
+| Previous Scores | 99 |
+| Extracurricular Activities | 1 (Yes) |
+| Sleep Hours | 9 |
+| Sample Question Papers Practiced | 1 |
+
+**Predicted Output:** The model generates the predicted Performance Index based on the given student details.
+
+### Result Summary
+
+- Successfully loaded and processed 10,000 student records.
+- Converted categorical data into numerical values.
+- Trained the Linear Regression model.
+- Achieved 98.87% training R² score and 98.90% testing R² score.
+- Evaluated model performance using MSE and RMSE.
+- Saved the trained model using Pickle.
+- Integrated the trained model with Flask.
+- Developed a web application to predict student performance.
+
+
 
 ## Future Enhancements
 
