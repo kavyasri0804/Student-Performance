@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Prediction</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            padding: 25px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            display: flex;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+        }
+
+        .left-section {
+            width: 40%;
+            background: linear-gradient(145deg, #283c86, #45a247);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 25px;
+        }
+
+        .left-section h1 {
+            font-size: 29px;
+            margin-bottom: 20px;
+        }
+
+        .left-section p {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .icon {
+            font-size: 75px;
+            margin-bottom: 25px;
+        }
+
+        .right-section {
+            width: 60%;
+            padding: 40px;
+        }
+
+        .right-section h2 {
+            text-align: center;
+            color: #283c86;
+            margin-bottom: 10px;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            background: #fafafa;
+        }
+
+        input:focus, select:focus {
+            border-color: #283c86;
+            box-shadow: 0 0 5px rgba(40,60,134,0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #283c86, #45a247);
+            border: none;
+            border-radius: 7px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 22px;
+            padding: 17px;
+            text-align: center;
+            background: #e9f8ed;
+            border: 1px solid #a5d6b0;
+            border-radius: 8px;
+            color: #176b35;
+        }
+
+        .result h3 {
+            margin-bottom: 8px;
+        }
+
+        @media(max-width: 700px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-section, .right-section {
+                width: 100%;
+            }
+
+            .right-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Left Section -->
+    <div class="left-section">
+
+        <div class="icon">🎓</div>
+
+        <h1>Student Performance Prediction</h1>
+
+        <p>
+            Predict student performance using
+            Machine Learning.
+            <br><br>
+            Enter the student's academic details
+            to estimate the expected performance
+            based on a Linear Regression model.
+        </p>
+
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+
+        <h2>Student Details</h2>
+
+        <p class="subtitle">
+            Enter the details to predict student performance
+        </p>
+
+        <form action="/predict" method="POST">
+
+            <div class="form-group">
+                <label>Hours Studied</label>
+                <input type="number" name="hours_studied"
+                       step="any" min="0" required
+                       placeholder="Enter hours studied">
+            </div>
+
+            <div class="form-group">
+                <label>Previous Scores</label>
+                <input type="number" name="previous_scores"
+                       step="any" min="0" max="100" required
+                       placeholder="Enter previous scores">
+            </div>
+
+            <div class="form-group">
+                <label>Extracurricular Activities</label>
+                <select name="extracurricular" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sleep Hours</label>
+                <input type="number" name="sleep_hours"
+                       step="any" min="0" max="24" required
+                       placeholder="Enter sleep hours">
+            </div>
+
+            <div class="form-group">
+                <label>Sample Question Papers Practiced</label>
+                <input type="number" name="sample_papers"
+                       min="0" required
+                       placeholder="Enter number of papers">
+            </div>
+
+            <button type="submit">Predict Performance</button>
+
+        </form>
+
+        {% if prediction is defined and prediction is not none %}
+        <div class="result">
+            <h3>Prediction Result</h3>
+            <h2>{{ "%.2f"|format(prediction) }}</h2>
+            <p>Predicted Student Performance Score</p>
+        </div>
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
